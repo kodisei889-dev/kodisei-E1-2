@@ -2,32 +2,84 @@
   "quizzes": [
     {
       "question": "파이썬에서 변수를 만들 때 사용하는 대입 연산자는?",
-      "answer": "="
+      "choices": [
+        "==",
+        "=",
+        ":=",
+        "!="
+      ],
+      "answer": 2
     },
     {
       "question": "리스트의 길이를 구하는 함수는?",
-      "answer": "len"
+      "choices": [
+        "count",
+        "size",
+        "len",
+        "length"
+      ],
+      "answer": 3
     },
     {
       "question": "조건문에 사용하는 키워드는?",
-      "answer": "if"
+      "choices": [
+        "for",
+        "while",
+        "if",
+        "def"
+      ],
+      "answer": 3
     },
     {
       "question": "반복문에서 많이 사용하는 키워드 중 하나는?",
-      "answer": "for"
+      "choices": [
+        "for",
+        "if",
+        "return",
+        "class"
+      ],
+      "answer": 1
     },
     {
       "question": "함수를 정의할 때 사용하는 키워드는?",
-      "answer": "def"
+      "choices": [
+        "import",
+        "return",
+        "def",
+        "class"
+      ],
+      "answer": 3
     },
     {
       "question": "파이썬 실행을 위한 명령어는? 파일은 main.py 이다.",
-      "answer": "python main.py"
+      "choices": [
+        "run main.py",
+        "python main.py",
+        "pyth main.py",
+        "execute main.py"
+      ],
+      "answer": 2
     },
     {
       "question": "원격 저장소 주소를 보고 싶으면?",
-      "answer": "git remote -v"
+      "choices": [
+        "git status",
+        "git branch",
+        "git remote -v",
+        "git log"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "파이썬 주석 기호는?",
+      "choices": [
+        "//",
+        "#",
+        "<!-- -->",
+        "**"
+      ],
+      "answer": 2
     }
   ],
-  "high_score": 3
+  "best_score": 6
 }
