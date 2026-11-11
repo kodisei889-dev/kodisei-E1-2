@@ -19,7 +19,11 @@
     {
       "question": "함수를 정의할 때 사용하는 키워드는?",
       "answer": "def"
+    },
+    {
+      "question": "파이썬 실행을 위한 명령어는? 파일은 main.py 이다.",
+      "answer": "python main.py"
     }
   ],
-  "high_score": 0
+  "high_score": 3
 }
