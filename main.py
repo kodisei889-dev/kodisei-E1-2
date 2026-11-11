@@ -1,4 +1,5 @@
 import json
+import random
 from pathlib import Path
 
 
@@ -231,8 +232,8 @@ class QuizGame:
 
     def save_state(self):
         data = {
-        "quizzes": [quiz.to_dict() for quiz in self.quizzes],
-        "best_score": self.best_score
+            "quizzes": [quiz.to_dict() for quiz in self.quizzes],
+            "best_score": self.best_score
         }
 
         try:
@@ -296,32 +297,33 @@ class QuizGame:
         print("\n퀴즈를 시작합니다.")
         score = 0
 
-        for idx, quiz in enumerate(self.quizzes, start=1):
-            print(f"\n[{idx}/{len(self.quizzes)}]")
+        # 원본 퀴즈 목록은 유지하고, 복사본만 섞기
+        random_quizzes = self.quizzes[:]
+        random.shuffle(random_quizzes)
+
+        total = len(random_quizzes)
+
+        for idx, quiz in enumerate(random_quizzes, 1):
+            print(f"\n[{idx}/{total}]")
             quiz.display()
 
-            user_answer = self.input_int("정답 번호를 입력하세요 (1~4): ", 1, 4)
+            answer = self.input_int("정답 번호를 입력하세요 (1~4): ", 1, 4)
 
-            if quiz.is_correct(user_answer):
+            if quiz.is_correct(answer):
                 print("정답입니다!")
                 score += 1
             else:
-                correct_choice = quiz.choices[quiz.answer - 1]
-                print(f"오답입니다. 정답은 {quiz.answer}번 ({correct_choice}) 입니다.")
+                print(f"오답입니다. 정답은 {quiz.answer}번입니다.")
 
         print("\n===== 결과 =====")
-        print(f"총 점수: {score} / {len(self.quizzes)}")
+        print(f"총 점수: {score} / {total}")
 
-        if self.best_score is None:
+        if self.best_score is None or score > self.best_score:
             self.best_score = score
-            print("첫 점수가 저장되었습니다.")
-        elif score > self.best_score:
-            self.best_score = score
+            self.save_state()
             print("최고 점수를 갱신했습니다!")
         else:
-            print(f"현재 최고 점수: {self.best_score}")
-
-        self.save_state()
+            self.save_state()
 
     def add_quiz(self):
         print("\n새 퀴즈를 추가합니다.")
