@@ -48,6 +48,10 @@ Python 기초 문법과 Git 사용법을 익히기 위해 만든 콘솔 기반 �
 
 > 개발 당시 Windows에서 `python` 명령이 Microsoft Store 실행 별칭으로 연결되는 문제가 있었습니다. 해당 환경에서는 Python Launcher 명령인 `py`로 실행했습니다.
 
+`python main.py` 실행 시 Microsoft Store 별칭 오류가 발생한 화면:
+
+[![python 명령 실행 오류](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/pic/pic1%20%282%29.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/pic/pic1%20%282%29.png)
+
 ## 3. 실행 방법
 
 ### 3-1. 저장소 복제
@@ -84,7 +88,9 @@ python main.py
 ### 3-4. 실행 예시 (명령 + 출력)
 
 ```
-PS C:\kodisei-E1-2> py main.py
+PS D:\코디세이\kodisei-E1-2> py main.py
+
+===== 퀴즈 게임 =====
 1. 퀴즈 풀기
 2. 퀴즈 추가
 3. 퀴즈 목록 보기
@@ -92,11 +98,11 @@ PS C:\kodisei-E1-2> py main.py
 5. 퀴즈 삭제
 6. 점수 기록 히스토리
 0. 종료
-메뉴를 선택하세요:
+메뉴 번호를 선택하세요:
 ```
 
 메뉴 번호를 입력하면 해당 기능이 실행되고, `0`을 입력하면 데이터를 저장한 뒤 종료됩니다.  
-(실제 문구는 최신 `main.py` 출력 기준이며, 실행 화면은 [9. 실행 화면](#9-실행-화면)에서 확인할 수 있습니다.)
+(실제 문구는 최신 `main.py` 출력 기준이며, 실행 화면은 [12. 실행 화면](#12-실행-화면)에서 확인할 수 있습니다.)
 
 ## 4. 주요 기능
 
@@ -273,17 +279,26 @@ kodisei-E1-2/
 ├── state.json              # 퀴즈, 최고 점수, 게임 기록 데이터
 ├── README.md               # 프로젝트 설명서
 ├── .gitignore              # Git 추적 제외 파일 설정
+├── pic/
+│   ├── pic1 (2).png        # python 별칭 오류 화면
+│   └── pic1 (10).png       # 병합 커밋 메시지 화면
 └── docs/
     └── screenshots/
         ├── python-version.png
-        ├── quiz-menu-and-add.png
-        ├── quiz-play-result.png
-        ├── git-push.png
-        ├── git-branch-log-status.png
-        ├── git-log-oneline.png        # 커밋 로그 증빙
+        ├── git branch --merged.png    # 병합 커밋 목록 (git log --merges --oneline)
+        ├── git-branch-log-status.png  # 브랜치·로그·상태 확인
+        ├── git-clone.png              # 별도 폴더(pulltest) clone 증빙
         ├── git-graph.png              # 브랜치·병합 그래프 증빙
-        ├── git-clone.png              # 별도 폴더 clone 증빙
-        └── git-pull.png               # 기존 폴더 pull 증빙
+        ├── git-log-oneline.png        # 커밋 로그 증빙
+        ├── git-pull.png               # 복제한 폴더(pulltest)의 git pull
+        ├── git-pull-origin-main.png   # 기존 폴더의 git pull origin main
+        ├── git-push.png               # 원격 저장소 push
+        ├── qize-play.png              # 퀴즈 풀이 (문제 수 선택, 힌트 사용)
+        ├── quiz3.png                  # 퀴즈 목록 보기
+        ├── quiz4.png                  # 최고 점수 확인
+        ├── quiz-history.png           # 점수 기록 히스토리
+        ├── quiz-menu-and-add.png      # 퀴즈 추가 (구버전 메뉴)
+        └── quiz-play-result.png       # 최고 점수 갱신 결과 (구버전 메뉴)
 ```
 
 ## 7. 데이터 파일 설명: state.json
@@ -489,7 +504,7 @@ Copy-Item state.json state.json.bak
 
 ### 11-3. 커밋 이력 증빙 (의미 있는 커밋 10개 이상)
 
-현재 저장소의 `main` 브랜치에는 **18개의 커밋**이 있습니다. 커밋 로그는 아래 명령어로 확인할 수 있습니다.
+현재 저장소의 `main` 브랜치에는 **20개의 커밋**(병합 커밋 2개 포함)이 있습니다. 커밋 로그는 아래 명령어로 확인할 수 있습니다.
 
 ```
 git log --oneline
@@ -499,6 +514,23 @@ git rev-list --count HEAD
 커밋 로그 화면:
 
 [![git log --oneline 결과](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/git-log-oneline.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/git-log-oneline.png)
+
+로그에서 확인되는 주요 커밋은 다음과 같습니다.
+
+| 커밋 | 메시지 | 내용 |
+| --- | --- | --- |
+| `f83908c` | Initial commit | 저장소 최초 생성 |
+| `ca1eb29` | README 실행 방법 보완 | 문서: 실행 방법 |
+| `289ce67` | README 기능 설명 보완 | 문서: 기능 설명 |
+| `788b109` | state.json 업데이트 | 데이터 파일 갱신 |
+| `8e2a53c` | 문서 파일 추가 | 문서 추가 |
+| `127fb55` | README 추가 수정 | `feature-readme` 브랜치 작업 |
+| `903a429` | state.md 내용 추가 | 문서: 상태 설명 |
+| `eddf8fb` | Complete quiz game requirements | 퀴즈 게임 요구사항 완성 |
+| `3620812` | Add random quiz order | 문제 랜덤 출제 추가 |
+| `90bdf76` | Add random quiz order | 문제 랜덤 출제 보완 |
+
+> 이 외에 메시지가 `update`인 커밋이 있습니다. 위 11-2의 커밋 규칙은 이후 커밋부터 적용합니다.
 
 GitHub 커밋 목록: <https://github.com/kodisei889-dev/kodisei-E1-2/commits/main/>
 
@@ -542,26 +574,41 @@ git status
 
 [![git log --graph 결과](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/git-graph.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/git-graph.png)
 
+위 그래프에서 `feature-readme` 브랜치가 `main`에서 갈라졌다가 `95e8bf5 Merge branch 'feature-readme'` 커밋으로 병합된 이력을 확인할 수 있습니다. `0b72d55 Merge remote main`은 원격 `main`과 로컬 `main`을 병합한 커밋입니다.
+
+병합 커밋만 따로 확인한 화면 (`git log --merges --oneline`):
+
+[![병합 커밋 목록](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/git%20branch%20--merged.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/git%20branch%20--merged.png)
+
+`feature-readme` 브랜치를 `main`에 병합할 때 자동으로 열린 병합 커밋 메시지 화면:
+
+[![병합 커밋 메시지 화면](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/pic/pic1%20%2810%29.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/pic/pic1%20%2810%29.png)
+
 ### 11-5. clone / pull 실습 증빙
 
-원격 저장소를 통해 **두 개의 폴더가 변경 사항을 주고받는** 과정을 다음 순서로 실습했습니다.
+원격 저장소를 별도 폴더에 복제하고, 두 폴더에서 `git pull`을 실행해 원격과 동기화되는지 확인했습니다.
 
-| 단계 | 폴더 | 명령어 | 목적 |
+| 단계 | 폴더 | 명령어 | 결과 |
 | --- | --- | --- | --- |
-| 1 | 별도 폴더 (예: `C:\clone-test`) | `git clone https://github.com/kodisei889-dev/kodisei-E1-2.git` | 원격 저장소를 새 폴더에 복제 |
-| 2 | 별도 폴더 | 파일 수정 → `git add` → `git commit` → `git push origin main` | 복제한 폴더에서 변경 후 원격에 반영 |
-| 3 | 기존 작업 폴더 | `git pull origin main` | 원격의 변경 사항을 기존 폴더로 가져오기 |
-| 4 | 기존 작업 폴더 | `git log --oneline` | 가져온 커밋이 반영되었는지 확인 |
+| 1 | `D:\코디세이\kodisei-E1-2\pulltest` | `git clone https://github.com/kodisei889-dev/kodisei-E1-2.git` | 원격 저장소 복제 완료 (79개 객체) |
+| 2 | `pulltest\kodisei-E1-2` (복제한 폴더) | `git pull` | `Already up to date.` |
+| 3 | `D:\코디세이\kodisei-E1-2` (기존 작업 폴더) | `git pull origin main` | `Already up to date.` |
 
-별도 폴더에서 `git clone` 수행 화면:
+두 폴더 모두 원격의 `main`과 같은 상태여서 새로 가져온 변경 사항은 없었습니다.
+
+`pulltest` 폴더에서 `git clone` 수행 화면:
 
 [![git clone 실행 화면](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/git-clone.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/git-clone.png)
 
-기존 폴더에서 `git pull` 수행 화면:
+복제한 폴더에서 `git pull` 수행 화면:
 
-[![git pull 실행 화면](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/git-pull.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/git-pull.png)
+[![복제한 폴더 git pull](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/git-pull.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/git-pull.png)
 
-> 실제로 수행한 작업만 기재합니다. 위 증빙 화면은 실습 후 촬영한 캡처로 대체합니다.
+기존 작업 폴더에서 `git pull origin main` 수행 화면:
+
+[![git pull origin main 실행 화면](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/git-pull-origin-main.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/git-pull-origin-main.png)
+
+> 실제로 수행한 작업만 기재합니다. 위 화면은 실습 중 촬영한 캡처입니다.
 
 ## 12. 실행 화면
 
@@ -569,11 +616,27 @@ git status
 
 [![퀴즈 메뉴 및 추가 화면](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/quiz-menu-and-add.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/quiz-menu-and-add.png)
 
-### 퀴즈 풀이 및 결과
+### 퀴즈 풀이 및 결과 (문제 수 선택, 힌트 사용)
 
-[![퀴즈 풀이 화면](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/quiz-play-result.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/quiz-play-result.png)
+[![퀴즈 풀이 화면](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/qize-play.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/qize-play.png)
 
-> 위 스크린샷은 기능 개발 과정에서 촬영한 실제 터미널 화면입니다. 일부 화면은 문제 수 선택, 힌트, 삭제, 점수 히스토리 기능을 추가하기 전 버전일 수 있으며, 현재 메뉴와 출력 내용은 실행 중인 최신 코드 기준으로 확인할 수 있습니다.
+### 최고 점수 갱신 결과
+
+[![최고 점수 갱신 화면](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/quiz-play-result.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/quiz-play-result.png)
+
+### 퀴즈 목록 보기
+
+[![퀴즈 목록 화면](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/quiz3.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/quiz3.png)
+
+### 최고 점수 확인
+
+[![최고 점수 화면](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/quiz4.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/quiz4.png)
+
+### 점수 기록 히스토리
+
+[![점수 기록 히스토리 화면](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/quiz-history.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/quiz-history.png)
+
+> 위 스크린샷은 기능 개발 과정에서 촬영한 실제 터미널 화면입니다. 퀴즈 추가 화면(`quiz-menu-and-add.png`)은 삭제·점수 히스토리 메뉴를 추가하기 전 버전이며, 현재 메뉴와 출력 내용은 실행 중인 최신 코드 기준으로 확인할 수 있습니다.
 
 ## 13. 과제 제출 전 확인 사항
 
