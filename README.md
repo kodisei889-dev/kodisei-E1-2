@@ -290,7 +290,7 @@ kodisei-E1-2/
         ├── git-clone.png              # 별도 폴더(pulltest) clone 증빙
         ├── git-graph.png              # 브랜치·병합 그래프 증빙
         ├── git-log-oneline.png        # 커밋 로그 증빙
-        ├── git-pull.png               # 복제한 폴더(pulltest)의 git pull
+        ├── git-pull-play.png          # 복제한 폴더(pulltest)의 git pull (변경 25개 파일 수신)
         ├── git-pull-origin-main.png   # 기존 폴더의 git pull origin main
         ├── git-push.png               # 원격 저장소 push
         ├── qize-play.png              # 퀴즈 풀이 (문제 수 선택, 힌트 사용)
@@ -586,23 +586,24 @@ git status
 
 ### 11-5. clone / pull 실습 증빙
 
-원격 저장소를 별도 폴더에 복제하고, 두 폴더에서 `git pull`을 실행해 원격과 동기화되는지 확인했습니다.
+원격 저장소를 별도 폴더(`pulltest`)에 복제한 뒤, 기존 작업 폴더에서 변경한 내용을 push하고 복제한 폴더에서 `git pull`로 받아오는 과정을 실습했습니다.
 
 | 단계 | 폴더 | 명령어 | 결과 |
 | --- | --- | --- | --- |
-| 1 | `D:\코디세이\kodisei-E1-2\pulltest` | `git clone https://github.com/kodisei889-dev/kodisei-E1-2.git` | 원격 저장소 복제 완료 (79개 객체) |
-| 2 | `pulltest\kodisei-E1-2` (복제한 폴더) | `git pull` | `Already up to date.` |
-| 3 | `D:\코디세이\kodisei-E1-2` (기존 작업 폴더) | `git pull origin main` | `Already up to date.` |
+| 1 | 별도 폴더 `pulltest` | `git clone https://github.com/kodisei889-dev/kodisei-E1-2.git` | 원격 저장소 복제 완료 (79개 객체) |
+| 2 | 기존 작업 폴더 `kodisei-E1-2` | README, 스크린샷, `state.json` 수정 후 `main`에 push | 원격 `main`이 `efe805d`에서 `c1c7327`로 갱신 |
+| 3 | 복제한 폴더 `pulltest\kodisei-E1-2` | `git pull` | **Fast-forward** `efe805d..c1c7327`, 25개 파일 변경 |
+| 4 | 기존 작업 폴더 `kodisei-E1-2` | `git pull origin main` | `Already up to date.` (이미 최신) |
 
-두 폴더 모두 원격의 `main`과 같은 상태여서 새로 가져온 변경 사항은 없었습니다.
+3단계에서 기존 폴더에서 push한 변경 사항(README 수정, 스크린샷 추가, `state.json` 갱신)이 복제한 폴더로 그대로 들어온 것을 확인했습니다.
 
 `pulltest` 폴더에서 `git clone` 수행 화면:
 
 [![git clone 실행 화면](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/git-clone.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/git-clone.png)
 
-복제한 폴더에서 `git pull` 수행 화면:
+복제한 폴더에서 `git pull`로 변경 사항을 받아온 화면 (Fast-forward, 25 files changed):
 
-[![복제한 폴더 git pull](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/git-pull.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/git-pull.png)
+[![복제한 폴더 git pull 결과](https://github.com/kodisei889-dev/kodisei-E1-2/raw/main/docs/screenshots/git-pull-play.png)](https://github.com/kodisei889-dev/kodisei-E1-2/blob/main/docs/screenshots/git-pull-play.png)
 
 기존 작업 폴더에서 `git pull origin main` 수행 화면:
 
