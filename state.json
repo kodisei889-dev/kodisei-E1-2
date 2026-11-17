@@ -8,7 +8,8 @@
         ":=",
         "!="
       ],
-      "answer": 2
+      "answer": 2,
+      "hint": "변수에 값을 저장할 때 사용하는 기호입니다."
     },
     {
       "question": "리스트의 길이를 구하는 함수는?",
@@ -18,7 +19,8 @@
         "len",
         "length"
       ],
-      "answer": 3
+      "answer": 3,
+      "hint": "세 글자로 이루어진 파이썬 내장 함수입니다."
     },
     {
       "question": "조건문에 사용하는 키워드는?",
@@ -28,7 +30,8 @@
         "if",
         "def"
       ],
-      "answer": 3
+      "answer": 3,
+      "hint": "영어로 '만약'이라는 의미입니다."
     },
     {
       "question": "반복문에서 많이 사용하는 키워드 중 하나는?",
@@ -38,7 +41,8 @@
         "return",
         "class"
       ],
-      "answer": 1
+      "answer": 1,
+      "hint": "정해진 횟수만큼 반복할 때 자주 사용합니다."
     },
     {
       "question": "함수를 정의할 때 사용하는 키워드는?",
@@ -48,7 +52,8 @@
         "def",
         "class"
       ],
-      "answer": 3
+      "answer": 3,
+      "hint": "define의 줄임말입니다."
     },
     {
       "question": "파이썬 실행을 위한 명령어는? 파일은 main.py 이다.",
@@ -58,7 +63,8 @@
         "pyth main.py",
         "execute main.py"
       ],
-      "answer": 2
+      "answer": 2,
+      "hint": "파이썬 인터프리터를 실행하는 명령어입니다."
     },
     {
       "question": "원격 저장소 주소를 보고 싶으면?",
@@ -68,7 +74,8 @@
         "git remote -v",
         "git log"
       ],
-      "answer": 3
+      "answer": 3,
+      "hint": "Git에서 원격 저장소를 의미하는 명령어를 사용합니다."
     },
     {
       "question": "파이썬 주석 기호는?",
@@ -78,8 +85,53 @@
         "<!-- -->",
         "**"
       ],
-      "answer": 2
+      "answer": 2,
+      "hint": "숫자 기호 또는 해시 기호라고 부릅니다."
     }
   ],
-  "best_score": 8
+  "best_score": 8,
+  "history": [
+    {
+      "date": "2026-11-17 12:57:32",
+      "total_questions": 2,
+      "score": 1,
+      "hint_used": 1
+    },
+    {
+      "date": "2026-11-17 13:01:26",
+      "total_questions": 2,
+      "score": 1,
+      "hint_used": 0
+    },
+    {
+      "date": "2026-11-17 13:01:45",
+      "total_questions": 2,
+      "score": 2,
+      "hint_used": 0
+    },
+    {
+      "date": "2026-11-17 13:01:58",
+      "total_questions": 2,
+      "score": 1,
+      "hint_used": 1
+    },
+    {
+      "date": "2026-11-17 13:02:46",
+      "total_questions": 2,
+      "score": 1,
+      "hint_used": 1
+    },
+    {
+      "date": "2026-11-17 13:04:53",
+      "total_questions": 2,
+      "score": 1,
+      "hint_used": 1
+    },
+    {
+      "date": "2026-11-17 13:05:36",
+      "total_questions": 2,
+      "score": 0,
+      "hint_used": 1
+    }
+  ]
 }
