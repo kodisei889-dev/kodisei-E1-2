@@ -529,3 +529,13 @@ class QuizGame:
 if __name__ == "__main__":
     game = QuizGame()
     game.run()
+
+
+class QuizGame:
+    def run(self): ...
+def main():
+    game = QuizGame()
+    game.run()
+
+if __name__ == "__main__":
+    main()
