@@ -800,3 +800,10 @@ python a.py
 import a
 → 출력: 모듈 로드 됨
 (if 블록의 "직접 실행 중!"은 출력되지 않음)
+
+with open(...) as file:
+with: 작업이 끝난 후 자원 정리를 자동으로 처리하는 문법
+
+open(...): 파일을 여는 함수
+
+as file: 열린 파일 객체에 file이라는 이름을 붙이는 것

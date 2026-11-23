@@ -526,13 +526,6 @@ class QuizGame:
             print("안전하게 종료되었습니다.")
 
 
-if __name__ == "__main__":
-    game = QuizGame()
-    game.run()
-
-
-class QuizGame:
-    def run(self): ...
 def main():
     game = QuizGame()
     game.run()
