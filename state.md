@@ -472,7 +472,7 @@ class Quiz:
 
 ## 4-1. 타입 힌트란?
 
-함수나 메서드의 매개변수에 타입을 표시하는 것을 타입 힌트(Type Hint) 또는 애너테이션(Annotation)이라고 한다.
+함수나 메서드의 매개변수와 반환값에 타입 정보를 표시하는 것을 타입 힌트(Type Hint)라고 한다. 이러한 타입 정보는 애너테이션(Annotation) 문법을 활용하여 작성한다.
 
 예를 들어 다음과 같이 작성한다.
 
@@ -486,6 +486,8 @@ def add(a: int, b: int) -> int:
 - `a: int`: a는 정수로 사용하기를 기대한다.
 - `b: int`: b는 정수로 사용하기를 기대한다.
 - `-> int`: 반환값은 정수로 사용하기를 기대한다.
+
+엄밀하게 구분하면 애너테이션은 타입 외의 다양한 정보도 표시할 수 있는 문법이고, 타입 힌트는 그중 타입 정보를 표현하는 용도다.
 
 하지만 타입 힌트를 작성했다고 해서 파이썬이 실제 입력값의 타입을 자동으로 검사하거나 변환하지는 않는다.
 
@@ -547,7 +549,7 @@ TypeError: type of argument "x" must be int; got str instead
 from collections.abc import Sequence
 ```
 
-또는 파이썬 버전에 따라 다음과 같이 사용할 수 있다.
+또는 다음과 같이 사용할 수도 있다.
 
 ```python
 from typing import Sequence
@@ -650,7 +652,202 @@ choices: Sequence[str]
 | `Sequence[T]` | 길이와 인덱스 접근이 필요하고 수정하지 않을 때 |
 | `Iterable[T]` | 단순히 순회만 하면 될 때 |
 
----
+## 4-9. 함수와 메서드에서 self의 사용
+
+파이썬에서 모든 함수에 `self`를 붙여야 하는 것은 아니다.
+
+`self`는 클래스 내부의 인스턴스 메서드에서 현재 객체 자신을 참조하기 위해 사용하는 매개변수다.
+
+함수의 종류와 사용 목적에 따라 `self`의 필요 여부가 달라진다.
+
+### ① 일반 함수
+
+클래스 외부에서 정의하는 일반 함수에는 `self`가 필요하지 않다.
+
+```python
+def add(a: int, b: int) -> int:
+    return a + b
+
+print(add(10, 20))
+```
+
+실행 결과:
+
+```text
+30
+```
+
+일반 함수는 객체에 소속되지 않으므로 `self`를 전달할 필요가 없다.
+
+### ② 인스턴스 메서드
+
+클래스 내부에서 정의하고 객체의 데이터를 다루는 메서드다.
+
+일반적으로 첫 번째 매개변수에 `self`를 작성한다.
+
+```python
+class Quiz:
+    def __init__(self, question):
+        self.question = question
+
+    def show_question(self):
+        print(self.question)
+
+quiz = Quiz("파이썬이란?")
+quiz.show_question()
+```
+
+실행 결과:
+
+```text
+파이썬이란?
+```
+
+여기서 `self`는 현재 메서드를 호출한 객체 자신을 의미한다.
+
+예를 들어 다음과 같이 사용할 수 있다.
+
+- `self.question`: 현재 객체가 가지고 있는 question 변수에 접근한다.
+- `self.show_question()`: 현재 객체의 다른 메서드를 호출한다.
+
+인스턴스 메서드를 호출하면 파이썬이 해당 인스턴스를 첫 번째 인자로 자동 전달한다.
+
+따라서 다음과 같이 작성한다.
+
+```python
+def show_question(self):
+    print(self.question)
+```
+
+호출할 때는 다음과 같이 사용한다.
+
+```python
+quiz.show_question()
+```
+
+호출할 때 `self`를 직접 전달하지 않아도 된다.
+
+### ③ 정적 메서드(@staticmethod)
+
+클래스 내부에 정의하지만 객체의 데이터인 `self`를 사용하지 않는 메서드다.
+
+이때는 `self`를 작성하지 않아도 된다.
+
+```python
+class Quiz:
+    @staticmethod
+    def abab(i: int, j: str) -> None:
+        ab = i * j
+        print(ab)
+
+quiz = Quiz()
+quiz.abab(1, "안녕")
+```
+
+실행 결과:
+
+```text
+안녕
+```
+
+`@staticmethod`를 사용하면 인스턴스가 첫 번째 인자로 자동 전달되지 않는다.
+
+따라서 객체의 상태에 의존하지 않는 독립적인 기능을 클래스 내부에 구성할 때 사용할 수 있다.
+
+### ④ 일반 메서드와 정적 메서드의 차이
+
+| 구분 | 인스턴스 메서드 | 정적 메서드 |
+|---|---|---|
+| 선언 방식 | `def 함수(self):` | `@staticmethod` + `def 함수():` |
+| self 필요 여부 | 필요 | 불필요 |
+| 인스턴스 정보 접근 | 가능 | 직접 접근 불가능 |
+| 인스턴스 자동 전달 | O | X |
+| 주요 용도 | 객체의 데이터와 기능 처리 | 객체 상태와 관계없는 기능 처리 |
+
+### ⑤ self를 사용해야 하는 경우
+
+다음과 같이 구분하면 이해하기 쉽다.
+
+- `self.question`처럼 객체가 가진 변수에 접근해야 한다면 `self`를 사용한다.
+- 객체의 상태를 변경하거나 객체의 다른 메서드를 호출한다면 일반적으로 `self`를 사용한다.
+- 객체의 데이터와 관계없이 독립적인 기능을 수행한다면 `@staticmethod`를 고려한다.
+- 클래스와도 관계없는 독립적인 기능이라면 일반 함수를 사용한다.
+
+추가로 `self`는 파이썬의 예약어가 아니다. 관례적으로 사용하는 이름이다.
+
+기술적으로 다른 이름을 사용할 수도 있지만, 특별한 이유가 없다면 `self`라고 작성하는 것이 일반적이다.
+
+### ⑥ self를 작성하지 않았을 때 발생하는 오류
+
+클래스 내부에 다음과 같이 메서드를 작성했다고 가정한다.
+
+```python
+class Quiz:
+    def abab(i: int, j: str):
+        ab = i * j
+        print(ab)
+
+    def __init__(self):
+        self.abab(1, "안녕")
+```
+
+이때 `self.abab(1, "안녕")`으로 호출하면 오류가 발생한다.
+
+```text
+TypeError: Quiz.abab() takes 2 positional arguments but 3 were given
+```
+
+그 이유는 인스턴스 메서드를 호출할 때 파이썬이 인스턴스 자신을 첫 번째 인자로 자동 전달하기 때문이다.
+
+실제로는 다음과 같이 전달되는 것과 같다.
+
+```python
+abab(self, 1, "안녕")
+```
+
+하지만 기존 함수는 `i`, `j` 두 개의 매개변수만 정의했기 때문에 세 개의 인자를 전달받아 오류가 발생한다.
+
+이 문제를 해결하는 방법은 두 가지다.
+
+**방법 1. self 추가하기**
+
+```python
+class Quiz:
+    def abab(self, i: int, j: str):
+        ab = i * j
+        print(ab)
+
+    def __init__(self):
+        self.abab(1, "안녕")
+```
+
+**방법 2. @staticmethod 사용하기**
+
+```python
+class Quiz:
+    @staticmethod
+    def abab(i: int, j: str):
+        ab = i * j
+        print(ab)
+
+    def __init__(self):
+        self.abab(1, "안녕")
+```
+
+두 방법 모두 정상적으로 실행된다.
+
+다만 `abab()` 함수가 `self`를 전혀 사용하지 않기 때문에 정적 메서드로 작성하는 방법도 적절하다.
+
+### 핵심 정리
+
+- 모든 함수에 `self`를 붙이는 것은 아니다.
+- 일반 함수에는 `self`가 필요하지 않다.
+- 인스턴스 메서드는 첫 번째 매개변수에 일반적으로 `self`를 사용한다.
+- `@staticmethod`를 사용하면 `self` 없이 클래스 내부에 메서드를 작성할 수 있다.
+- 인스턴스 메서드를 호출하면 파이썬이 인스턴스 자신을 첫 번째 인자로 자동 전달한다.
+- `self`는 예약어가 아니라 관례적으로 사용하는 이름이다.
+
+이번 내용을 통해 타입 힌트는 타입 정보를 표시하는 기능이고, `self`는 클래스의 인스턴스를 참조하는 기능이라는 점을 구분해서 이해하게 되었다.
 
 # 5. 입력값 검증과 방어적 프로그래밍
 

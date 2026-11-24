@@ -11,6 +11,10 @@ class SafeExit(Exception):
 
 
 class Quiz:
+    def abab(self, i : int, j : str) :
+        ab = i * j
+        print (f"{ab}")
+
     def __init__(self, question, choices, answer, hint=""):
         if not isinstance(question, str) or not question.strip():
             raise ValueError("문제는 비어 있을 수 없습니다.")
@@ -18,8 +22,10 @@ class Quiz:
         if not isinstance(choices, list) or len(choices) != 4:
             raise ValueError("선택지는 반드시 4개여야 합니다.")
 
-        cleaned_choices = []
+        self.abab(1,"안녕")
 
+        cleaned_choices = []
+        
         for choice in choices:
             if not isinstance(choice, str) or not choice.strip():
                 raise ValueError("선택지는 비어 있을 수 없습니다.")
@@ -52,6 +58,11 @@ class Quiz:
     def is_correct(self, user_answer):
         return self.answer == user_answer
 
+    def abcd(i : int, b : str) :
+            b = i
+            print (f"{b}")
+            return b
+    
     def to_dict(self):
         return {
             "question": self.question,
